@@ -11,16 +11,26 @@ class App extends Component {
   state = {
     events: [],
     locations: [],
+    numberOfEvents: 32,
   };
 
-  updateEvents = (location) => {
+  updateEvents = (location, eventCount) => {
     getEvents().then((events) => {
-      const locationEvents =
-        location === "all"
-          ? events
-          : events.filter((event) => event.location === location);
+      let eventList = events;
+      // filter event list by location
+      if (location !== undefined) {
+        if (location !== "all") {
+          eventList = events.filter((event) => event.location === location);
+        }
+      }
+
+      // Shorten event list
+      let shortEventList =
+        eventCount === undefined
+          ? eventList.slice(0, this.state.numberOfEvents)
+          : eventList.slice(0, eventCount);
       this.setState({
-        events: locationEvents,
+        events: shortEventList,
       });
     });
   };
@@ -45,7 +55,10 @@ class App extends Component {
           locations={this.state.locations}
           updateEvents={this.updateEvents}
         />
-        <NumberOfEvents />
+        <NumberOfEvents
+          numberOfEvents={this.state.numberOfEvents}
+          updateEvents={this.updateEvents}
+        />
         <EventList events={this.state.events} />
       </div>
     );

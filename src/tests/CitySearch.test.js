@@ -79,4 +79,14 @@ describe("<CitySearch /> component", () => {
       display: "none",
     });
   });
+
+  test("suggestions list should be shown when input is focused", () => {
+    CitySearchWrapper.setState({
+      query: "Berlin",
+      showSuggestions: undefined,
+    });
+    CitySearchWrapper.find(".city").simulate("focus");
+    expect(CitySearchWrapper.state("showSuggestions")).toBe(true);
+    expect(CitySearchWrapper.find(".suggestions").prop("style")).toEqual({});
+  });
 });
