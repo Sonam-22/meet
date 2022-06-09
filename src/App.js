@@ -8,14 +8,16 @@ import "./nprogress.css";
 import { getEvents, extractLocations } from "./api";
 
 class App extends Component {
+  static defaultNumberOfEvents = 32;
+
   state = {
     events: [],
     locations: [],
-    numberOfEvents: 32,
+    numberOfEvents: App.defaultNumberOfEvents,
   };
 
   updateEvents = (location, eventCount) => {
-    const validEventCount = eventCount || 0;
+    const validEventCount = eventCount || App.defaultNumberOfEvents;
     this.setState({
       numberOfEvents: validEventCount,
     });
@@ -30,9 +32,8 @@ class App extends Component {
       }
 
       // Shorten event list
-      let shortEventList = validEventCount
-        ? eventList.slice(0, validEventCount)
-        : [...eventList];
+      let shortEventList = eventList.slice(0, validEventCount);
+
       this.setState({
         events: shortEventList,
       });
