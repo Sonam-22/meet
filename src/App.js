@@ -15,6 +15,11 @@ class App extends Component {
   };
 
   updateEvents = (location, eventCount) => {
+    const validEventCount = eventCount || 0;
+    this.setState({
+      numberOfEvents: validEventCount,
+    });
+
     getEvents().then((events) => {
       let eventList = events;
       // filter event list by location
@@ -25,10 +30,9 @@ class App extends Component {
       }
 
       // Shorten event list
-      let shortEventList =
-        eventCount === undefined
-          ? eventList.slice(0, this.state.numberOfEvents)
-          : eventList.slice(0, eventCount);
+      let shortEventList = validEventCount
+        ? eventList.slice(0, validEventCount)
+        : [...eventList];
       this.setState({
         events: shortEventList,
       });
@@ -51,14 +55,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <CitySearch
-          locations={this.state.locations}
-          updateEvents={this.updateEvents}
-        />
-        <NumberOfEvents
-          numberOfEvents={this.state.numberOfEvents}
-          updateEvents={this.updateEvents}
-        />
+        <div className="search-container">
+          <CitySearch
+            locations={this.state.locations}
+            updateEvents={this.updateEvents}
+          />
+          <NumberOfEvents
+            numberOfEvents={this.state.numberOfEvents}
+            updateEvents={this.updateEvents}
+          />
+        </div>
+
         <EventList events={this.state.events} />
       </div>
     );
