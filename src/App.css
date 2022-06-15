@@ -45,7 +45,6 @@ input[type="number"] {
   flex-direction: column;
   flex-basis: 300px;
   max-width: 300px;
-  margin: auto;
   position: relative;
 }
 
@@ -100,6 +99,10 @@ input[type="number"] {
   font-weight: 600;
 }
 
+.Alert {
+  min-height: 55px;
+}
+
 .group-name {
   text-transform: uppercase;
   font-size: 14px;
@@ -115,9 +118,13 @@ input[type="number"] {
 }
 
 .numberOfEvents {
-  width: 200px;
+  width: 100%;
   margin: 20px auto;
   text-align: center;
+}
+
+.NumberOfEvents {
+  width: 300px;
 }
 
 .button-wrapper {
@@ -126,11 +133,6 @@ input[type="number"] {
   grid-gap: 20px;
   padding: 20px;
   font-family: sans-serif;
-}
-
-.Alert {
-  position: fixed;
-  top: 20px;
 }
 
 .data-vis-wrapper {
@@ -201,7 +203,7 @@ input[type="number"] {
 .search-container {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 @media only screen and (min-width: 992px) {

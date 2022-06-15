@@ -59,9 +59,22 @@ describe("<CitySearch /> component", () => {
     expect(CitySearchWrapper.state("suggestions")).toEqual(filteredLocations);
   });
 
+  test("info text should shown when no suggestions found", () => {
+    CitySearchWrapper.setState({ query: "", suggestions: [] });
+    CitySearchWrapper.find(".city").simulate("change", {
+      target: { value: "Some unknown location" },
+    });
+
+    expect(CitySearchWrapper.state("suggestions")).toEqual([]);
+    expect(CitySearchWrapper.state("infoText")).toBe(
+      "We can not find the city you are looking for. Please try another city"
+    );
+  });
+
   test("selecting a suggestion should change query state", () => {
-    CitySearchWrapper.setState({
-      query: "Berlin",
+    CitySearchWrapper.setState({ query: "", suggestions: [] });
+    CitySearchWrapper.find(".city").simulate("change", {
+      target: { value: "Berlin" },
     });
     const suggestions = CitySearchWrapper.state("suggestions");
     CitySearchWrapper.find(".suggestions li").at(0).simulate("click");

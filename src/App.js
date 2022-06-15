@@ -17,11 +17,6 @@ class App extends Component {
   };
 
   updateEvents = (location, eventCount) => {
-    const validEventCount = eventCount || App.defaultNumberOfEvents;
-    this.setState({
-      numberOfEvents: validEventCount,
-    });
-
     getEvents().then((events) => {
       let eventList = events;
       // filter event list by location
@@ -32,10 +27,11 @@ class App extends Component {
       }
 
       // Shorten event list
-      let shortEventList = eventList.slice(0, validEventCount);
+      let shortEventList = eventList.slice(0, eventCount);
 
       this.setState({
         events: shortEventList,
+        numberOfEvents: eventCount,
       });
     });
   };
