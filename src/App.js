@@ -3,6 +3,7 @@ import "./App.css";
 import EventList from "./EventList";
 import CitySearch from "./CitySearch";
 import NumberOfEvents from "./NumberOfEvents";
+import { InfoAlert } from "./Alert";
 import "./nprogress.css";
 
 import { getEvents, extractLocations } from "./api";
@@ -52,6 +53,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {!navigator.onLine && (
+          <InfoAlert id="infoAlert" text={this.state.infoText} />
+        )}
         <div className="search-container">
           <CitySearch
             locations={this.state.locations}
