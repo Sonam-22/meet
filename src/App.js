@@ -54,7 +54,10 @@ class App extends Component {
     return (
       <div className="App">
         {!navigator.onLine && (
-          <InfoAlert id="infoAlert" text={this.state.infoText} />
+          <InfoAlert
+            id="infoAlert"
+            text="You are offline and currently viewing cached data"
+          />
         )}
         <div className="search-container">
           <CitySearch
