@@ -14,9 +14,12 @@ export const checkToken = async (accessToken) => {
   )
     .then((res) => res.json())
     .catch((error) => {
-      return error.json && typeof error.json === "function"
-        ? error.json()
-        : { error };
+      if (navigator.onLine) {
+        return error.json && typeof error.json === "function"
+          ? error.json()
+          : { error };
+      }
+      return {};
     });
 
   return result;
