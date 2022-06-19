@@ -14,7 +14,7 @@ export const checkToken = async (accessToken) => {
   )
     .then((res) => res.json())
     .catch((error) => {
-      error.json && typeof error.json === "function" && error.json();
+      error.json && typeof error.json === "function" ? error.json() : { error };
     });
 
   return result;
