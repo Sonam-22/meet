@@ -1,4 +1,4 @@
-import { mockData } from "./mock-data";
+import { mockData, mockToken } from "./mock-data";
 import axios from "axios";
 import NProgress from "nprogress";
 
@@ -9,6 +9,9 @@ export const extractLocations = (events) => {
 };
 
 export const checkToken = async (accessToken) => {
+  if (window.location.href.startsWith("http://localhost")) {
+    return mockToken;
+  }
   const result = await fetch(
     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${accessToken}`
   )
