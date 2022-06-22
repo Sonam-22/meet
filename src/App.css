@@ -137,13 +137,15 @@ input[type="number"] {
 
 .data-vis-wrapper {
   display: flex;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
-.data-vis-wrapper .recharts-responsive-container {
-  min-width: 100%;
-  display: flex;
+.data-vis-wrapper > div {
+  width: 50%;
 }
+
 .recharts-surface {
   overflow: visible;
 }
@@ -207,14 +209,11 @@ input[type="number"] {
   flex-wrap: wrap;
 }
 
-@media only screen and (min-width: 992px) {
+@media only screen and (max-width: 992px) {
   .data-vis-wrapper {
-    flex-direction: row;
+    flex-direction: column;
   }
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
+  .data-vis-wrapper > div {
+    width: 100%;
   }
 }
